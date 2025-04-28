@@ -1,4 +1,5 @@
 ## Project Proposal: Mutations in the Cystic Fibrosis Gene
+**Dionne Bui, Lawrence Fung, Gloria Riva**
 
 # Introduction
 
