@@ -38,3 +38,8 @@ variants. Human Mutation. 2017; 38: 1297–1315. https://doi.org/10.1002/humu.23
 [7]	Jupyter nbviewer, 
 https://nbviewer.org/github/NBISweden/workshop-python/blob/ht18/assignment/Solutions_project.ipynb 
 [8]	Google Deepmind AlphaFold, https://deepmind.google/technologies/alphafold/
+
+
+# What Datasets we use
+https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi?& 
+https://cftr2.org/mutations_history
