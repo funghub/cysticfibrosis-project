@@ -3,7 +3,7 @@ import pandas as pd
 import re
 
 # Load input files
-xls = pd.ExcelFile("AllVariantsCFTR-France_03-09-2024 (1).xlsx")
+xls = pd.ExcelFile("datasets/AllVariantsCFTR-France_03-09-2024.xlsx")
 df = xls.parse('AllVariants_03092024')
 
 with open("raw_sequence.txt", "r") as file:
