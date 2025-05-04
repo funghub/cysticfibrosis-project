@@ -72,6 +72,31 @@ def mut_seq(row):  # row passes the dataframe from sorted_xl.apply()
             mut_sequence = hgvs_seq[:del_loc1] + hgvs_seq[del_loc1+1:]
         return mut_sequence
 
+# apply function to each line to get the new column with the sequences
 sorted_xl["mut_DNA"] = sorted_xl.apply(mut_seq, axis=1)
 
+# create csv file with the new sequences in a column
 sorted_xl.set_index("HGVS name (NM_000492.3)").to_csv("create_mutations/output_mut_seqs.csv")  # mutated sequences in mut_DNA
+
+
+
+## isolate the HGVS name and the sequence
+just_sequences = sorted_xl[["HGVS name (NM_000492.3)","mut_DNA"]]
+
+
+
+
+
+
+# create shorter sequences for Alphafold
+def cut_seq(row):
+    sequence_cut = row["mut_DNA"][:5000]
+    return sequence_cut
+
+just_sequences["mut_DNA_cut"]= just_sequences.apply(cut_seq, axis = 1)
+
+# create csv file shorter sequences in a column
+cut_sequences = just_sequences.drop(columns=["mut_DNA"])
+cut_sequences.set_index("HGVS name (NM_000492.3)").to_csv("create_mutations/output_shorter_seqs.csv")  # mutated sequences in mut_DNA and shorter ones to work in alphafold
+
+
