@@ -20,8 +20,8 @@ for example: c. 1000C>T (133 + 1000 - 1 - 1 = actual position of C) or (132 + 99
 
 # Set CDS start position and regex search
 codon_start = 133
-sub_pattern = re.compile(r"c\.(\d+)([ATGC])>([ATGC])")
-del_pattern = re.compile(r"c\.(\d+)(?:_(\d+))?(?:\+(\d+))?del$")
+sub_pattern = re.compile(r"c\.(\d+)([ATGC])>([ATGC])")  # groups: (\d+),([ATGC]),([ATGC])
+del_pattern = re.compile(r"c\.(\d+)(?:_(\d+))?(?:\+(\d+))?del$") # groups:(\d+),(?:_(\d+)),(\d+)
 
 # extract coordinates
 def search_location(location):
@@ -44,33 +44,34 @@ def search_location(location):
                 return pd.Series([f"{del_location1}-{del_location2}", None])
 
 sorted_xl[["mut_location","sub_nucleotide"]] = sorted_xl["HGVS name (NM_000492.3)"].apply(search_location)
+
+'''
+Use these to validate
 print(sorted_xl)
-
 print(sorted_xl["sub_nucleotide"].value_counts())
+'''
 
+# create column in dataframe with the mutated sequence hgvs_seq
+def mut_seq(row):  # row passes the dataframe from sorted_xl.apply()
+    # print(row["mut_location"])
+    if row["DNA type"] == "subs":
+        index = 133 + int(row["mut_location"]) - 2
+        mut_sequence = hgvs_seq[:index] + row["sub_nucleotide"] + hgvs_seq[index+1:]
+        return mut_sequence
+    elif row["DNA type"] == "del":
+        match_del = re.search(r"(\d+)(?:-(\d+))?", row["mut_location"])
+        del_loc1 = match_del.group(1)
+        del_loc2 = match_del.group(2)
 
+        del_loc1 = int(del_loc1) + 133 - 2
 
-# # Apply mutations to sequence
-# mutated_sequence = list(sequence)
+        if del_loc2 != None:
+            del_loc2 = int(del_loc2) + 133 - 2
+            mut_sequence = hgvs_seq[:del_loc1] + hgvs_seq[del_loc2+1:]
+        else:
+            mut_sequence = hgvs_seq[:del_loc1] + hgvs_seq[del_loc1+1:]
+        return mut_sequence
 
-# for _, row in filtered_df.iterrows():
-#     parsed = row['parsed']
-#     if not parsed:
-#         continue
-#     if parsed[0] == "substitution":
-#         _, pos, ref, alt = parsed
-#         idx = pos - genomic_start
-#         if 0 <= idx < len(mutated_sequence) and sequence[idx] == ref:
-#             mutated_sequence[idx] = alt
-#     elif parsed[0] == "deletion":
-#         _, start, end, _ = parsed
-#         idx_start = start - genomic_start
-#         idx_end = end - genomic_start + 1
-#         if 0 <= idx_start < len(mutated_sequence):
-#             del mutated_sequence[idx_start:idx_end]
+sorted_xl["mut_DNA"] = sorted_xl.apply(mut_seq, axis=1)
 
-# # Save mutated sequence
-# with open("mutated_sequence.txt", "w") as f:
-#     f.write(">Mutated CFTR sequence\n")
-#     for i in range(0, len(mutated_sequence), 70):
-#         f.write(''.join(mutated_sequence[i:i+70]) + "\n")
+sorted_xl.set_index("HGVS name (NM_000492.3)").to_csv("create_mutations/output_mut_seqs.csv")  # mutated sequences in mut_DNA
