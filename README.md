@@ -8,7 +8,5 @@ Cystic fibrosis is a known genetic disease that affects one in every 2500 in Ame
 Through publicly available data, our project aims to identify the conserved regions of the CFTR gene by comparing sequences with and without cystic fibrosis. From the identified conserved regions, we will investigate how mutations in those regions of the gene affect the final shape and function of the CFTR protein, specifically the crucial parts of the protein.
 
 
-
 # What Datasets we use
-https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi?& 
-https://cftr2.org/mutations_history
+https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi?&
