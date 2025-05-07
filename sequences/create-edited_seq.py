@@ -1,5 +1,5 @@
 # open the raw dequence file
-with open("sequences/raw_sequence.txt", "r") as file:
+with open("sequences/wt_dna_sequence.txt", "r") as file:
     next(file)
     sequence = file.read()
 
