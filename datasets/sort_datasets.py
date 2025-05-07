@@ -10,8 +10,9 @@ del_col = raw_exc.drop(columns = ['Legacy name','Genomic position (NC_000007.13,
 
 # print(del_col["subclass"].value_counts()) # this is to test whether filtering works
 
-# take out VUS1 and VUS2 because they are unlikely to be pathogenic
+# take out VUS1 and VUS2 because they are unlikely to be pathogenic; keep only exon substitutions and deletions
 filtered_exc = del_col[(del_col['type segment'] == "exon") & (del_col['DNA type'].isin(['subs','del']) & (~del_col['subclass'].isin(['NULL', 'undefined','non-CF','VUS1', 'VUS2'])))]
+
 # print(filtered_exc.head(10))
 # print(filtered_exc["subclass"].value_counts())
 listed = ['HGVS name (NM_000492.3)', 'type segment', 'num segment', 'DNA type','nom_prot', 'type_prot', 'class', 'subclass', 'CFTR2']

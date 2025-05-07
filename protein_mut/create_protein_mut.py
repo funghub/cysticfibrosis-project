@@ -82,6 +82,6 @@ def write_phe508():
     print(phe_del_sequence)  
     # here is your mutated protein sequence that can be entered into alphafold
 
-    with open("protein_mut/phe508.txt", "w") as mut_protein:
+    with open("protein_mut/test_phe508.txt", "w") as mut_protein:
         mut_protein.write(phe_del_sequence)
 # write_phe508()  # this will print out the amino acid sequence for phe508 deletion
