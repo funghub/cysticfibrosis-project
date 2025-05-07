@@ -101,18 +101,18 @@ with open("create_mutations/cftr_sequences.fasta", "w") as create_fasta:
         create_fasta.write(f"{wrapped_seq}\n\n")
 
 
-# create shorter sequences for Alphafold
-def cut_seq(row):
-    sequence_cut = row["mut_DNA"][:5000]  # the CDS is 133 to 4575, shortening it to just 5000 is ok
-    return sequence_cut
+# # create shorter sequences for Alphafold
+# def cut_seq(row):
+#     sequence_cut = row["mut_DNA"][:5000]  # the CDS is 133 to 4575, shortening it to just 5000 is ok
+#     return sequence_cut
 
-just_sequences["mut_DNA_cut"]= just_sequences.apply(cut_seq, axis = 1)
+# just_sequences["mut_DNA_cut"]= just_sequences.apply(cut_seq, axis = 1)
 
-# create csv file shorter sequences in a column
-cut_sequences = just_sequences.drop(columns=["mut_DNA"])
-cut_sequences.set_index("HGVS name (NM_000492.3)").to_csv("create_mutations/output_shorter_seqs.csv")  # mutated sequences in mut_DNA and shorter ones to work in alphafold
-'''
-We can now take the sequences from output_shorter_seq.csv and put that in to alphafold ---> this did not end up working because AlphaFold does not convert it to protein with splicing.
-It only takes in protein sequences to protein structure and DNA sequences to DNA structure, not DNA sequence to protein structure.
-'''
+# # create csv file shorter sequences in a column
+# cut_sequences = just_sequences.drop(columns=["mut_DNA"])
+# cut_sequences.set_index("HGVS name (NM_000492.3)").to_csv("create_mutations/output_shorter_seqs.csv")  # mutated sequences in mut_DNA and shorter ones to work in alphafold
+# '''
+# We can now take the sequences from output_shorter_seq.csv and put that in to alphafold ---> this did not end up working because AlphaFold does not convert it to protein with splicing.
+# It only takes in protein sequences to protein structure and DNA sequences to DNA structure, not DNA sequence to protein structure.
+# '''
 
