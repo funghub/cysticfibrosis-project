@@ -13,8 +13,8 @@ with open("protein_mut\wt_protein_seq.txt", "r") as file:
 ## this will ask user to input required information to create protein sequence
 while True:
     print(f"Original sequence:\n{protein_seq}\n\n")
-    print("Please open the datasets\AllVariantsCFTR-France_03-09-2024.xlsx and reference column laveled type_prot and nom_prot")
-    type_prot = (input("Assistance with reading notation can be found: https://www.hgvs.org/mutnomen/recs-prot.html#indelp \n\nWhat is type_prot (the type of mutation: frameshift, missense, inframe, stop codon)? : ")).lower()
+    print("Please open the datasets\AllVariantsCFTR-France_03-09-2024.xlsx and reference column labeled type_prot and nom_prot")
+    type_prot = (input("Assistance with reading notation can be found here: https://www.hgvs.org/mutnomen/recs-prot.html#indelp \n\nWhat is type_prot (the type of mutation: frameshift, missense, inframe, stop codon)? : ")).lower()
     if type_prot == "frameshift":
         first_aa = int(input("What is the location of the first amino acid? ex: Thr ### Glnfs*3 : "))
         aa_replaced = (input("What is the amino acid replaced at that position? Please enter as a letter : ")).upper()
