@@ -1,5 +1,11 @@
-## Project Proposal: Mutations in the Cystic Fibrosis Gene
+## Project Proposal: Visualizing Mutations in the Cystic Fibrosis Gene with AlphaFold
 **Dionne Bui, Lawrence Fung, Gloria Riva**
+
+# Input Data Files
+The input data files are 
+* **datasets/AllVariantsCFTR-France_03-09-2024.xlsx**
+* **sequence/wt_dna_sequence.txt**
+* **protein_mut/wt_protein_seq.txt**
 
 # Introduction
 
