@@ -1,5 +1,4 @@
 ## Project Proposal: Visualizing Mutations in the Cystic Fibrosis Gene with AlphaFold
-**Dionne Bui, Lawrence Fung, Gloria Riva**
 
 # Input Data Files
 The input data files are 
